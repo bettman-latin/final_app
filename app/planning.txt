@@ -1,0 +1,61 @@
+Planning
+
+Model:
+table 1: user
+- id 				|	INTEGER PRIMARY KEY AUTOINCREMENT
+- username			|	TEXT UNIQUE NOT NULL
+- password			|	TEXT NOT NULL
+- first				|	TEXT NOT NULL
+- last 				|	TEXT NOT NULL
+* look at playlist for "collection" example
+
+table 2: blog
+- id 				|	INTEGER PRIMARY KEY AUTOINCREMENT
+- author_id			|	INTEGER NOT NULL
+- created			|	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+- title				|	TEXT NOT NULL
+- body				|	TEXT NOT NULL
+
+
+Views:
+- login page
+	- general log in UI
+	- redirects to home page
+	- register option
+
+- user page
+	- Shows user information
+	- Shows created posts
+	- Shows favorited posts
+	- gives ability to log out
+
+- browse page
+	- view all posts
+
+- post page
+	- text description of post
+	- preview files
+	- view downloadable files
+	- comment on post
+	- view other comments on post
+	- ability to "collect" a post
+	- have general author data shown
+
+- create post
+	- text description of post
+	- file upload area
+
+- update post
+	- update text description
+	- add or delete files to post
+	- delete post feature
+		- would have to remove the post from peoples collections
+- favorite page
+	- view all favorited posts
+
+
+Controller:
+
+
+
+
