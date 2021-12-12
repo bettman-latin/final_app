@@ -12,6 +12,7 @@ CREATE TABLE user (
   password TEXT NOT NULL,
   first TEXT NOT NULL,
   last TEXT NOT NULL
+
 );
 
 CREATE TABLE post (
@@ -22,3 +23,11 @@ CREATE TABLE post (
   body TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
+
+CREATE TABLE collection (
+  f_user INTEGER NOT NULL,
+  f_posts INTEGER,
+  FOREIGN KEY (f_user)  REFERENCES user (id)
+  FOREIGN KEY (f_posts) REFERENCES post (id) 
+
+)

@@ -54,8 +54,18 @@ Views:
 	- view all favorited posts
 
 
-Controller:
+TO DO:
+I have been looking into how to let a user upload files, and for them to be viewable by other users.
+I'm making progress on it, but it is slow, this task was more complicated then I origionally thought it would be
+the table for "collections" works, and I am working on a profile page where users can view their, and others, favorited posts
 
+^^^^ minimum 
+VVVV would like to do 
+
+add a comment section to posts, users should be able to leave comments, and possibly respond to other's comments as well
+
+create a file preview, so that a user knows what the file contains that they might download
+I think I can get this to work for image and video files, but I have no idea how to do the in browser 3d model viewer stuff like Thingiverse does
 
 
 

@@ -52,11 +52,6 @@ def register():
         db = get_db()
         error = None
 
-        if not username:
-            error = "Username is required."
-        elif not password:
-            error = "Password is required."
-
         if error is None:
             try:
                 db.execute("INSERT INTO user (username, password, first, last) VALUES (?, ?, ?, ?)",

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+   <body>
+      <h1>Student!</h1>
+      <div>
+         <table>
+            {% for key, value in result.items() %}
+               {% if key != "Teacher" %}
+                  <tr>
+                     <th> {{ key }} </th>
+                     <td> {{ value }} </td>
+                  </tr>
+               {%endif %}
+            {% endfor %}
+         </table>
+      </div>
+   </body>
+</html>
+
+<style>
+
+body {
+  background-image: linear-gradient(to bottom right, rgba(0, 0, 255, 0.85), rgba(128,0,128, 0.85));
+}
+div{
+   box-shadow: 10px 10px 40px;
+   border-radius: 25px;
+   background-color: #ffffff;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   padding-left: 2%;
+   padding-right: 2%;
+}
+table{
+   font-family: "Sans-serif", Verdana;
+   text-align: center;
+   color: #1E1926;
+   font-size: 30px;
+   margin-bottom: 2px;
+}
+h1{
+   font-family: "Sans-serif", Verdana;
+   text-align: center;
+   color: #1E1926;
+   font-size: 40px;
+}
+</style>

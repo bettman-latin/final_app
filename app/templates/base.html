@@ -1,24 +1,37 @@
-<!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1><a href="{{ url_for('index') }}">Flaskr</a></h1>
-  <ul>
+<!-- <div class="topnav">
+    <div class="search-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+  <a class="active" href="#home">Explore</a>
+  <a href="#news">Education</a>
+  <a href="#contact">Create</a>
+  <a href="#about">Sign Up</a>
+</div> -->
+
+
+<div class="topnav">
     {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <span>{{ g.user['username'] }}</span>
+      <a href="{{ url_for('auth.logout') }}">Log Out</a>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
-    {% endif %}
-  </ul>
-</nav>
+      <a href="{{ url_for('auth.register') }}">Register</a>
+      <a href="{{ url_for('auth.login') }}">Log In</a>
+        {% endif %}
+    <a href="#placeholder">Profile</a>
+    <a href="{{ url_for('blog.create') }}">Create</a>
+    <a href="{{ url_for('blog.index') }}">Explore</a>
+    <div class="search-container">
+      <input type="text" placeholder="Search Thingiworld" name="search">
+    </div>
+</div>
+
 <section class="content">
   <header>
     {% block header %}{% endblock %}
   </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 </section>

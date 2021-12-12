@@ -1,21 +1,15 @@
-{% extends 'base.html' %}
-
-
-
-{% block content %}
-  <link rel="stylesheet" href="{{ url_for('static',filename ='form_style.css') }}">
-   <body>        
+<html>
+<link rel="stylesheet" href="{{ url_for('static',filename ='form_style.css') }}">
+   <body>
       <div>
-         <form method="POST" id="form">
-          <h1>{% block title %}Log In{% endblock %}</h1>
-
-          <div id="a">
-            <p id="username_Text">Username</p>
-            <input class="input" id="username" type="text" name="username" autocomplete="off"/>
-            <p id="password_Text">Password</p>
-            <input class="input" id="password" type="text" name="password" autocomplete="off"/>
-            <p><input id="button" type="button" value="Log In"/></p>
-          </div>
+         <form id="Form" action="http://localhost:5000/result" method="POST">
+            <h1>Submission</h1>
+            <p id="Name_Text">Name</p>
+            <input class="input" id="Name" type="text" name="Name" autocomplete="off"/>
+            <p id="Email_Text">Email</p>
+            <input class="input" id="Email" type="text" name="Email" autocomplete="off"/>
+            <p>Teacher<label><input class="check" type="checkbox" name="Teach"/><span></span></label></p>
+            <p><input id="button" type="button" value="Submit"/></p>
          </form>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="gear" viewBox="0 0 16 16">
@@ -24,5 +18,5 @@
 </svg>
    </body>
 </html>
-<script type="text/javascript" src="{{ url_for('static',filename ='form_script2.js') }}"></script>
-{% endblock %}
+<script type="text/javascript" src="{{ url_for('static',filename ='form_script.js') }}"></script>
+
