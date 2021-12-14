@@ -107,12 +107,15 @@ def view(id):
 @bp.route("/profile")
 def profile():
     db = get_db()
-    query = """SELECT post.id, title, body, created, author_id, username
+    query = """SELECT post.id, title, body, created, author_id
             FROM post JOIN user ON post.author_id = user.id
             ORDER BY created DESC"""
     posts = db.execute(query).fetchall() # will be a list of all Rows
     return render_template("blog/profile.html", posts=posts)
 
+@bp.route("/favorites")
+def favorites():
+    return render_template("blog/favorites.html")
 
 @bp.route("/test")
 def test():

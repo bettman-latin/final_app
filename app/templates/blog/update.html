@@ -1,19 +1,40 @@
 {% extends 'base.html' %}
-
+<!-- 
 {% block header %}
   <h1>{% block title %}Edit "{{ post['title'] }}"{% endblock %}</h1>
-{% endblock %}
+{% endblock %} -->
+<link rel="stylesheet" href="{{ url_for('static',filename ='form_style2.css') }}">
+
 
 {% block content %}
-  <form method="post">
+<link rel="stylesheet" href="{{ url_for('static',filename ='form_style2.css') }}">
+
+<!--   <form method="post">
     <label for="title">Title</label>
     <input name="title" id="title" value="{{ request.form['title'] or post['title'] }}" required>
     <label for="body">Body</label>
     <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
     <input type="submit" value="Save">
   </form>
+ -->
+  <form method="post" id="form">
+    <div id="t">
+            <p id="title_Text">Title</p>
+            <input value="{{ request.form['title'] or post['title'] }}" class="input" id="title" type="text" name="title" autocomplete="off"/>
+    </div>
+    <div id="b">
+            <p id="body_Text">Body</p>
+            <input value="{{ request.form['body'] or post['body'] }}"class="input" id="body" type="text" name="body" autocomplete="off"/>
+    </div>
+    <div id="s">
+            <p><input id="button" type="button" value="Update"></p>
+    </div>
+        </form>
+
   <hr>
   <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
   </form>
+
+<script type="text/javascript" src="{{ url_for('static',filename ='form_script3.js') }}"></script>
 {% endblock %}

@@ -1,16 +1,32 @@
 {% extends 'base.html' %}
 
-<h1>{% block title %}New Post{% endblock %}</h1>
-
+<!-- <h1>{% block title %}New Post{% endblock %}</h1>
+ -->
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static',filename ='form_style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename ='form_style2.css') }}">
 
-  <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
-    <input type="submit" value="Save">
-  </form>
+<!--   <form method="post">
+    <p for="title">Title</p>
+    <input class="input" type="text" name="title" id="title" value="{{ request.form['title'] }}" required>
+    <p for="body">Body</p>
+    <input class="input" type="text" name="body" id="body">{{ request.form['body'] }}</input>
+    <p><input id="button" type="Submit" value="Save"><p>
+  </form> -->
+
+
+  <form method="post" id="form">
+    <div id="t">
+            <p id="title_Text">Title</p>
+            <input class="input" id="title" type="text" name="title" autocomplete="off"/>
+    </div>
+    <div id="b">
+            <p id="body_Text">Body</p>
+            <input class="input" id="body" type="text" name="body" autocomplete="off"/>
+    </div>
+    <div id="s">
+            <p><input id="button" type="button" value="Post"></p>
+    </div>
+        </form>
+<script type="text/javascript" src="{{ url_for('static',filename ='form_script3.js') }}"></script>
 {% endblock %}
