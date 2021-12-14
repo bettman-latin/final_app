@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+<!-- <h1>{% block title %}Posts{% endblock %}</h1>
+ -->
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static',filename ='view_style.css') }}">
+<ul class="group">
+  {% for post in posts %}
+  {% if g.user['id'] == post['author_id'] %}
+    <li class="post">
+      <header>
+        <div>
+          <h1><a href="{{ url_for('blog.view', id=post['id']) }}">{{ post['title'] }}</a></h1>
+<!--           <p class="body">{{ post['body'] }}</p>
+ -->          <div><p>{{ post['username'] }}</p></div>
+          <div><p>{{ post['created'].strftime('%Y-%m-%d') }}</p></div>
+        </div>
+<!--         {% if g.user['id'] == post['author_id'] %}
+          <a href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
+        {% endif %} -->
+      </header>
+    </li>
+    {% if not loop.last %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+</ul>
+    {% endblock %}
