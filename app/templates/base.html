@@ -15,18 +15,14 @@
 
 <div class="topnav">
     {% if g.user %}
-      <span>{{ g.user['username'] }}</span>
+      <a href="#placeholder"> {{ g.user['username'] }}</a>
       <a href="{{ url_for('auth.logout') }}">Log Out</a>
     {% else %}
       <a href="{{ url_for('auth.register') }}">Register</a>
       <a href="{{ url_for('auth.login') }}">Log In</a>
         {% endif %}
-    <a href="#placeholder">Profile</a>
     <a href="{{ url_for('blog.create') }}">Create</a>
     <a href="{{ url_for('blog.index') }}">Explore</a>
-    <div class="search-container">
-      <input type="text" placeholder="Search Thingiworld" name="search">
-    </div>
 </div>
 
 <section class="content">

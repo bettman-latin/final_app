@@ -1,5 +1,14 @@
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
 body {
    background-image: linear-gradient(to bottom right, rgba(0, 0, 255, 0.85), rgba(128,0,128, 0.85));
+/*   margin-top: 5%;
+   margin-bottom: 10%;*/
+   overflow: auto;
+   height: 100%;
 }
 form{
    box-shadow: 10px 10px 20px;
@@ -7,7 +16,7 @@ form{
    background-color: #ffffff17;
    backdrop-fiter: blur(12px);
    position: fixed;
-   top: 50%;
+   top: 53%;
    left: 50%;
    transform: translate(-50%, -50%);
    padding-left: 2%;
@@ -46,6 +55,7 @@ h1{
    transition-duration: 0.2s;
    border: 2px solid #7B7485;
    margin-bottom: 25px;
+   margin-top: 10px;
    background-color: rgba(256, 256, 256, 0.1);
    border-color: transparent;
 }

@@ -1,0 +1,72 @@
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+   background-image: linear-gradient(to bottom right, rgba(0, 0, 255, 0.85), rgba(128,0,128, 0.85));
+   overflow: auto;
+   height: 100%;
+}
+
+.group {
+  display: flex;
+  
+  flex-flow: row wrap;
+  
+  padding-top: 8%;
+  margin-left: 5%;
+  margin-right: 3%;
+  list-style: none;
+}
+
+.post {
+   box-shadow: 8px 8px 16px ;
+   border-radius: 25px;
+   background-color: #ffffff17;
+   backdrop-fiter: blur(12px);
+
+   padding-left: 2%;
+   padding-right: 2%;
+   padding-bottom: 1%;
+   margin-top: 2%;
+   margin-left: 2%;
+   margin-right: 2%;
+   margin-bottom: 1%;
+   min-width: 15%;
+   min-height: 10%;
+}
+
+a{
+   font-family: "Sans-serif", Verdana;
+   text-align: center;
+   color: rgba(256, 256, 256, 0.6);
+   font-size: 20px;
+   margin-bottom: 2px;
+   transition-duration: 0.4s;
+   text-decoration: none;
+}
+
+a:hover{
+   color: rgba(256, 256, 256, 0.8);
+}
+
+p{
+   font-family: "Sans-serif", Verdana;
+   text-align: left;
+   color: rgba(256, 256, 256, 0.4);
+   font-size: 15px;
+   transition-duration: 0.4s;
+   margin: 0;
+   text-decoration: none;
+}
+
+
+h1{
+   font-family: "Sans-serif", Verdana;
+   text-align: center;
+   color: rgba(256, 256, 256, 0.5);
+   font-size: 20px;
+   padding-left: min(10px);
+   padding-right: min(10px);
+}
