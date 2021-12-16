@@ -1,10 +1,15 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for)
+    Blueprint, flash, g, redirect, render_template, request, url_for, send_file, current_app, send_from_directory)
 
+import os
+from werkzeug.utils import secure_filename
 from werkzeug.exceptions import abort
 
 from app.auth import login_required # the decorator to ensure login
 from app.db import get_db
+
+
+#app = Flask(__name__)
 
 # group together related parts of the app
 bp = Blueprint("blog", __name__)
@@ -33,7 +38,7 @@ def get_my_post(id):
     :raise 403: if the current user isn't the author
     """
     db = get_db()
-    query = """SELECT post.id, title, body, created, author_id, username, first, last
+    query = """SELECT post.id, title, body, created, author_id, username, first, last, file
             FROM post JOIN user ON post.author_id = user.id
             WHERE post.id = ?"""
     post = db.execute(query, (id,)).fetchone()
@@ -54,7 +59,16 @@ def create():
     if request.method == "POST":
         title = request.form["title"]
         body = request.form["body"]
+        file = request.files["file"]
+
         error = None
+
+        if "file" not in request.files:
+            print('no file')
+        else:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            print("saved file successfully")
 
         if not title:
             error = "Title is required."
@@ -65,9 +79,16 @@ def create():
             db = get_db()
             # title and body come from form, author_id comes from user which was done on request already in auth
             # could also get session.get(user_id) but that's not guaranteed to exist
-            query = "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)"
-            db.execute(query, (title, body, g.user["id"]))
-            db.commit()
+            if filename:
+                query = "INSERT INTO post (title, body, author_id, file) VALUES (?, ?, ?, ?)"
+                db.execute(query, (title, body, g.user["id"], filename))
+                db.commit()
+            else:
+                query = "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)"
+                db.execute(query, (title, body, g.user["id"]))
+                db.commit()
+
+      #send file name as parameter to downlad
             return redirect(url_for("blog.index"))
 
     return render_template("blog/create.html")
@@ -98,11 +119,25 @@ def update(id):
 
     return render_template("blog/update.html", post=post)
 
-@bp.route("/<int:id>")
+@bp.route("/<int:id>", methods=("GET","POST"))
 def view(id):
+    if request.method == "POST":
+        # favorite = request.form['favorite']
+        db = get_db()
+        query = "INSERT INTO collection (f_posts, f_user) VALUES (?, ?) "
+        db.execute(query, (id, g.user["id"]))
+        db.commit()
+
     post = get_my_post(id)
     return render_template("blog/view.html", post=post);
     # return id
+
+
+@bp.route("/uploads/<file>")
+def download_file(file):
+
+    return send_from_directory(current_app.config["UPLOAD_FOLDER"], file)
+
 
 @bp.route("/profile")
 def profile():
@@ -115,6 +150,13 @@ def profile():
 
 @bp.route("/favorites")
 def favorites():
+
+    db = get_db()
+    query = """SELECT post.id, title, body, created, author_id
+            FROM collection JOIN post ON collection.f_posts = post.id
+            WHERE collection.f_user = ?"""
+    posts = db.execute(query, (g.user["id"],)).fetchall() # will be a list of all Rows
+    return render_template("blog/index.html", posts=posts)
     return render_template("blog/favorites.html")
 
 @bp.route("/test")
@@ -135,6 +177,40 @@ def delete(id):
     db.execute("DELETE FROM post WHERE id = ?", (id,))
     db.commit()
     return redirect(url_for("blog.index"))
+
+
+
+# # Upload API
+# @app.route('/uploadfile', methods=['GET', 'POST'])
+# def upload_file():
+#     if request.method == 'POST':
+#         # check if the post request has the file part
+#         if 'file' not in request.files:
+#             print('no file')
+#             return redirect(request.url)
+#         file = request.files['file']
+#         # if user does not select file, browser also
+#         # submit a empty part without filename
+#         if file.filename == '':
+#             print('no filename')
+#             return redirect(request.url)
+#         else:
+#             filename = secure_filename(file.filename)
+#             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+#             print("saved file successfully")
+#       #send file name as parameter to downlad
+#             return redirect('/downloadfile/'+ filename)
+#     return render_template('upload_file.html')
+# # Download API
+# @app.route("/downloadfile/<filename>", methods = ['GET'])
+# def download_file(filename):
+#     return render_template('download.html',value=filename)
+# @app.route('/return-files/<filename>')
+# def return_files_tut(filename):
+#     file_path = UPLOAD_FOLDER + filename
+#     return send_file(file_path, as_attachment=True, attachment_filename='')
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0')
 
 
 

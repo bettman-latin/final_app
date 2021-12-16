@@ -14,7 +14,13 @@
         {% endif %}
       </header>
       <p class="body">{{ post['body'] }}</p>
+      <form method="post" id="form">
+      <input id="favorite" class="button" type="submit" name="Teach"/>
+    </form>
+    <p class="body">File Name{{ post['file'] }}</p>
+    <a class="action" href="{{ url_for('blog.download_file', file=post['file']) }}">Download</a>
     </article>
 {% endblock %}
+
 
 {% block content %}{% endblock %}

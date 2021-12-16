@@ -15,7 +15,7 @@
   </form> -->
 
 
-  <form method="post" id="form">
+  <form method="post" id="form" enctype="multipart/form-data">
     <div id="t">
             <p id="title_Text">Title</p>
             <input class="input" id="title" type="text" name="title" autocomplete="off"/>
@@ -26,6 +26,9 @@
     </div>
     <div id="s">
             <p><input id="button" type="button" value="Post"></p>
+    </div>
+    <div id="i">
+            <p><input id="file" type="file" name="file" value="File Upload"></p>
     </div>
         </form>
 <script type="text/javascript" src="{{ url_for('static',filename ='form_script3.js') }}"></script>

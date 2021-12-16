@@ -2,6 +2,9 @@ import os
 
 from flask import Flask
 
+UPLOAD_FOLDER = 'uploads/'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'py', 'css', 'html', 'sql', 'js'}
+
 
 '''
 each terminal session: 
@@ -20,6 +23,8 @@ def create_app(test_config=None):
         SECRET_KEY="dev",
         # store the database in the instance folder for development
         DATABASE=os.path.join(app.instance_path, "app.sqlite"),
+        UPLOAD_FOLDER = os.path.join(app.instance_path, "uploads/")
+
     )
 
     # ensure the instance folder exists, it's where the db will live
